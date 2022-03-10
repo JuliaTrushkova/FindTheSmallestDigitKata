@@ -140,22 +140,27 @@ Console.WriteLine(String.Join(',', Smallest(7000142109589056)));
 
 static long[] Smallest2(long n)
 {
-    var best = new long[] { n, 0, 0 };
-    var str = n.ToString();
+    long[] result = new long[] { n, 0, 0 };
+    
+    string str = n.ToString();
 
     for (int i = 0; i < str.Length; i++)
     {
-        var d = str.Substring(i, 1);
-        var s = str.Remove(i, 1);
+        string element = str.Substring(i, 1);
+        string temp = str.Remove(i, 1);
 
         for (int j = 0; j < str.Length; j++)
         {
-            var m = Convert.ToInt64(s.Insert(j, d));
-            if (m < best[0]) { best[0] = m; best[1] = i; best[2] = j; }
+            long min = Convert.ToInt64(temp.Insert(j, element));
+            if (min < result[0]) 
+            { 
+                result[0] = min; 
+                result[1] = i; 
+                result[2] = j; 
+            }
         }
     }
-
-    return best;
+    return result;
 }
 
 Console.WriteLine(String.Join(',', Smallest2(285365)));
