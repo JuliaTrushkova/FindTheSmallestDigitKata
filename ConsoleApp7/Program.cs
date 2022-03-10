@@ -137,3 +137,30 @@ Console.WriteLine(String.Join(',', Smallest(199819884756)));
 Console.WriteLine(String.Join(',', Smallest(100000)));
 Console.WriteLine(String.Join(',', Smallest(43476174177360352)));
 Console.WriteLine(String.Join(',', Smallest(7000142109589056)));
+
+static long[] Smallest2(long n)
+{
+    var best = new long[] { n, 0, 0 };
+    var str = n.ToString();
+
+    for (int i = 0; i < str.Length; i++)
+    {
+        var d = str.Substring(i, 1);
+        var s = str.Remove(i, 1);
+
+        for (int j = 0; j < str.Length; j++)
+        {
+            var m = Convert.ToInt64(s.Insert(j, d));
+            if (m < best[0]) { best[0] = m; best[1] = i; best[2] = j; }
+        }
+    }
+
+    return best;
+}
+
+Console.WriteLine(String.Join(',', Smallest2(285365)));
+Console.WriteLine(String.Join(',', Smallest2(197178875653625376)));
+Console.WriteLine(String.Join(',', Smallest2(199819884756)));
+Console.WriteLine(String.Join(',', Smallest2(100000)));
+Console.WriteLine(String.Join(',', Smallest2(43476174177360352)));
+Console.WriteLine(String.Join(',', Smallest2(7000142109589056)));
